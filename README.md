@@ -1,39 +1,30 @@
-# Express::Search
+## 中国快递信息查询 [![Build Status](https://secure.travis-ci.org/chilwar/china-express.png)](http://travis-ci.org/chilwar/china-express)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/express/search`. To experiment with that code, run `bin/console` for an interactive prompt.
+支持顺丰、EMS、申通、圆通、中通、宅急送、韵达、天天快递、联邦快递、汇通等，无须验证码
 
-TODO: Delete this and the text above, and describe your gem
+### 安装
 
-## Installation
+    gem 'express-search'
 
-Add this line to your application's Gemfile:
+### 使用
 
-```ruby
-gem 'express-search'
-```
+需要申请 [爱查快递API](http://www.ickd.cn/api/reg.html)，申请成功，爱查会把 `id` 和 `key` 发到你的邮箱
 
-And then execute:
+    require 'express/search'
+    Express::Search.id = 'your_id_hear'
+    Express::Search.key = 'your_key_here'
+    Express::Search.get_result(单号, '快递公司')
+    
+    可选参数(按顺序)：
+      type: 返回值类型(json(默认)|html|xml|text)
+      encode: 数据编码(gbk|utf8(默认))
+      ord: 排序(asc(默认)|desc)
 
-    $ bundle
+### 示例
 
-Or install it yourself as:
-
-    $ gem install express-search
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/express-search/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+    result = Express::Search.get_result('123456', '顺丰')
+    result.success? # true
+    result.data # [{'time' => "2012-10-08 09:20", 'context' => "签收人是:马"}]
+    result.data.each do |item|
+      puts "#{item['time']} #{item['context']}"
+    end
