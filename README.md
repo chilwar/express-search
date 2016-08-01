@@ -1,4 +1,4 @@
-## Express Search[![Build Status](https://secure.travis-ci.org/chilwar/china-express.png)](http://travis-ci.org/chilwar/china-express)
+## Express Search[![Build Status](https://travis-ci.org/chilwar/express-search.svg?branch=master)](http://travis-ci.org/chilwar/china-express)
 
 支持顺丰、EMS、申通、圆通、中通、宅急送、韵达、天天快递、联邦快递、汇通等，无须验证码
 
